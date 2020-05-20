@@ -871,7 +871,7 @@ p.form-submit {
   margin-top: 30px;
 }
 #comments h5#respond span {
-  color: #f08c79;
+  color: #6588e4;
 }
 #comments .url, #comments .comment-date {
   text-decoration: none;
@@ -1055,7 +1055,7 @@ body.overlay-active header.header, body.overlay-active .wrap,
   background-color: transparent;
   font-size: 30px;
   font-size: 3rem;
-  border-bottom: 1px solid #f08c79;
+  border-bottom: 1px solid #6588e4;
   max-width: 800px;
 }
 #topsearch input.s::-webkit-input-placeholder {
@@ -1453,7 +1453,7 @@ span.i {
   line-height: 65px;
   width: 100%;
   height: 65px;
-  background: #f08c79;
+  background: #6588e4;
   color: #fff;
   font-size: 18px;
   font-size: 1.8rem;
@@ -1711,14 +1711,14 @@ h2.home-blog-title {
 }
 .meta li:before {
   content: " • ";
-  color: #f08c79;
+  color: #6588e4;
 }
 .meta li:first-child:before {
   content: " ";
 }
 
 .more-link {
-  border: 2px solid #f08c79 !important;
+  border: 2px solid #6588e4 !important;
   padding: 0.35em 0.75em 0.4em 0.75em;
   line-height: 1.3;
   display: block;
@@ -1982,7 +1982,7 @@ input[type="tel"], input[type="password"], textarea,
 #edd_checkout_form_wrap,
 header.header nav, .hero, #comments .url,
 .form-submit input[type="submit"] {
-  font-family: 'Amatic SC', 'Heveltica Neue', Arial, sans-serif;
+  font-family: 'Pompiere', 'Heveltica Neue', Arial, sans-serif;
 }
 
 /* Font Sizes */
@@ -2214,7 +2214,7 @@ body, html {
 }
 
 .hero {
-  background-color: #f08c79;
+  background-color: #fff;
 }
 
 button:hover, input[type="submit"]:hover {
@@ -2226,7 +2226,7 @@ button:hover, input[type="submit"]:hover {
 }
 
 .pagination li a {
-  background-color: #f08c79;
+  background-color: #6588e4;
 }
 
 .pagination li a:hover {
@@ -2253,15 +2253,15 @@ header.header nav ul > li.current-page-ancestor > a,
 .meta a:hover,
 .single-post .content a, header.header nav a:hover,
 .widget a:hover, .side a:hover, .main-archive h2 a:hover, .related h6 a:hover, .home-sticky-post h3 a:hover {
-  color: #f08c79;
+  color: #6588e4;
 }
 
 body, blockquote {
-  border-color: #f08c79;
+  border-color: #6588e4;
 }
 
 a:hover h1.entry-title {
-  color: #f08c79;
+  color: #6588e4;
 }
 
 a:hover, a:hover, .meta a,
@@ -2279,19 +2279,19 @@ a:hover, a:hover, .meta a,
 
 /* Borders */
 .single-post .post-content a {
-  border-bottom: 1px solid #f08c79;
+  border-bottom: 1px solid #6588e4;
 }
 
 .post .post-content a {
-  border-bottom: 1px solid #f08c79;
+  border-bottom: 1px solid #6588e4;
 }
 
 .post-content blockquote {
-  border-left: 1px solid #f08c79;
+  border-left: 1px solid #6588e4;
 }
 
 .single-post .content a {
-  border-color: #f08c79;
+  border-color: #6588e4;
 }
 
 .single-post .post-content a:hover,
@@ -2502,7 +2502,7 @@ input[type="submit"],
 .edd-add-to-cart.button, .edd-add-to-cart.white.button,
 .edd_go_to_checkout.button, .edd_go_to_checkout.button.white,
 .edd-submit.button, .edd-submit.button.white {
-  color: #f08c79 !important;
+  color: #6588e4 !important;
   padding: 1em 2.5em;
   text-shadow: none;
   display: inline-block;
@@ -2510,7 +2510,7 @@ input[type="submit"],
   margin-bottom: 1em;
   font-weight: 700;
   text-decoration: none !important;
-  border: 2px solid #f08c79 !important;
+  border: 2px solid #6588e4 !important;
   border-radius: 50px;
   background-color: transparent;
   font-size: 20px;
