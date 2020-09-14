@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>SpamFilter</title>
+<title>Spam_filter</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13085,46 +13085,67 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
 <span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
 <span class="kn">from</span> <span class="nn">nltk.stem.porter</span> <span class="kn">import</span> <span class="n">PorterStemmer</span>
 
-<span class="c1">#This class simulates the emails</span>
-<span class="k">class</span> <span class="nc">email</span><span class="p">():</span>
+<span class="k">class</span> <span class="nc">Email</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;This class simulates the emails&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>  <span class="c1"># id of each email</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="s1">&#39;rt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>  <span class="c1"># read the text of the file</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="c1"># split the text into words and strip all punctuation</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">fileName</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="c1">#this is the id of the email</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
-        <span class="c1">#read the file</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;rt&#39;</span><span class="p">)</span>
-        <span class="c1">#make all words lowercase</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-        <span class="c1">#split the text into words and strip all punctuation</span>
-        <span class="n">words</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-        <span class="c1">#strip stop words and number, only remain the stems</span>
+        <span class="c1"># strip stop words and number, only remain the stems</span>
         <span class="n">en_stopwords</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
         <span class="n">porter</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">();</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">porter</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">en_stopwords</span><span class="p">]</span>
-        <span class="c1">#this is the score of its spamicity</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="n">score</span>
-        
-    <span class="k">def</span> <span class="nf">getId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="n">score</span>  <span class="c1"># this is the score of the email&#39;s spamicity</span>
+
+    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span>
 
-    <span class="k">def</span> <span class="nf">getWords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_words</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">words</span>
 
-    <span class="k">def</span> <span class="nf">getScore</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">score</span>
 
-    <span class="k">def</span> <span class="nf">setScore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">newScore</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="n">newScore</span>
+    <span class="k">def</span> <span class="nf">set_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_score</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="n">new_score</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[nltk_data] Downloading package punkt to /Users/charliez/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package stopwords to
+[nltk_data]     /Users/charliez/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -13139,7 +13160,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;What do you mean by tokenizing the text?&quot;</span>
@@ -13157,7 +13178,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[3]:</div>
+    <div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -13182,7 +13203,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">tokenized</span><span class="p">:</span>
@@ -13201,7 +13222,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[4]:</div>
+    <div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -13226,7 +13247,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">stems</span> <span class="o">=</span> <span class="p">[</span><span class="n">PorterStemmer</span><span class="p">()</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">tokenized</span><span class="p">]</span>
@@ -13243,7 +13264,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[5]:</div>
+    <div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -13268,7 +13289,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">w</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">stems</span> <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()]</span>
@@ -13284,7 +13305,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[6]:</div>
+    <div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -13312,79 +13333,119 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">filter</span><span class="p">():</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Filter</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;This class simulates the filter of the mailbox&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
-        <span class="c1"># this is the threshold of the spam score</span>
+        <span class="sd">&quot;&quot;&quot;this is the threshold of the spam score&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
-        <span class="c1"># the inbox stores all hams</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inbox</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="c1"># spams store all spams</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">spams</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="c1"># the bag of words of spams</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">spamBOW</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="c1"># the bag of words of hams</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hamBOW</span> <span class="o">=</span> <span class="p">{}</span>
-    
-    <span class="c1">#this function determines the spamicity of each word</span>
-    <span class="k">def</span> <span class="nf">wordSpamicity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
-        <span class="c1">#the frequency of the word appeared in spams</span>
-        <span class="n">wordInSpam</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="c1">#the frequency of the word appeared in hams</span>
-        <span class="n">wordInHam</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">inbox</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># the inbox stores all hams</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spams</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># spams store all spams</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spam_bow</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># the bag of words of spams</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ham_bow</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># the bag of words of hams</span>
+
+
+    <span class="k">def</span> <span class="nf">word_spamicity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Determines the spamicity of each word.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            word: the word to be calculated</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            the spamicity of the word</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">word_spam</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># the frequency of the word appeared in spams</span>
+        <span class="n">word_ham</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># the frequency of the word appeared in hams</span>
+
         <span class="c1">#checking the bags of words to set the frequency</span>
-        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spamBOW</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="n">wordInSpam</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spamBOW</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hamBOW</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="n">wordInHam</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hamBOW</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spam_bow</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">word_spam</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spam_bow</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ham_bow</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">word_ham</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ham_bow</span><span class="p">[</span><span class="n">word</span><span class="p">]</span>
+
         <span class="c1">#calculating the probability of a spam word</span>
-        <span class="n">pws</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">wordInSpam</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spams</span><span class="p">))</span>
-        <span class="n">pwh</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">wordInHam</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inbox</span><span class="p">))</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">pws</span> <span class="o">+</span> <span class="n">pwh</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">psw</span> <span class="o">=</span><span class="mi">0</span>
-        <span class="k">else</span><span class="p">:</span> <span class="n">psw</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">pws</span><span class="o">/</span><span class="p">(</span><span class="n">pws</span><span class="o">+</span><span class="n">pwh</span><span class="p">))</span>
+        <span class="n">pws</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">word_spam</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spams</span><span class="p">))</span>
+        <span class="n">pwh</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">word_ham</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inbox</span><span class="p">))</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pws</span> <span class="o">+</span> <span class="n">pwh</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">psw</span> <span class="o">=</span><span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">psw</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">pws</span><span class="o">/</span><span class="p">(</span><span class="n">pws</span><span class="o">+</span><span class="n">pwh</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">psw</span>
-        
-    <span class="c1">#this function calcuates the spam score of the email according to its words&#39; spamicity</span>
-    <span class="k">def</span> <span class="nf">spamScore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mail</span><span class="p">):</span>
-        <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+
+    <span class="k">def</span> <span class="nf">spam_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mail</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calcuates the spam score of the email according to its words&#39; spamicity</span>
+<span class="sd">        Args:</span>
+<span class="sd">            mail: the mail to be calculated</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            the spam score of the email according to its words&#39; spamicity</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+
         <span class="c1">#getting the spamicity of each word</span>
-        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">mail</span><span class="o">.</span><span class="n">getWords</span><span class="p">():</span>
-            <span class="n">spamicity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wordSpamicity</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">spamicity</span> <span class="o">&gt;=</span> <span class="mf">0.9</span><span class="p">:</span> <span class="n">score</span> <span class="o">+=</span> <span class="mi">3</span>
-            <span class="k">if</span> <span class="n">spamicity</span> <span class="o">&gt;=</span> <span class="mf">0.75</span> <span class="ow">and</span> <span class="n">spamicity</span> <span class="o">&lt;</span> <span class="mf">0.9</span><span class="p">:</span> <span class="n">score</span> <span class="o">+=</span> <span class="mi">2</span>
-            <span class="k">if</span> <span class="n">spamicity</span> <span class="o">&gt;=</span> <span class="mf">0.5</span> <span class="ow">and</span> <span class="n">spamicity</span> <span class="o">&lt;</span> <span class="mf">0.75</span><span class="p">:</span> <span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">mail</span><span class="o">.</span><span class="n">get_words</span><span class="p">():</span>
+            <span class="n">spamicity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">word_spamicity</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">spamicity</span> <span class="o">&gt;=</span> <span class="mf">0.9</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">+=</span> <span class="mi">3</span>
+            <span class="k">if</span> <span class="n">spamicity</span> <span class="o">&gt;=</span> <span class="mf">0.75</span> <span class="ow">and</span> <span class="n">spamicity</span> <span class="o">&lt;</span> <span class="mf">0.9</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">+=</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="n">spamicity</span> <span class="o">&gt;=</span> <span class="mf">0.5</span> <span class="ow">and</span> <span class="n">spamicity</span> <span class="o">&lt;</span> <span class="mf">0.75</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">score</span>
-    
-    <span class="c1">#this function receives a new email, calculates its spam score, update the bags of words, and sort the email</span>
+
+
     <span class="k">def</span> <span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mail</span><span class="p">):</span>
-        <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spamScore</span><span class="p">(</span><span class="n">mail</span><span class="p">)</span>
-        <span class="n">mail</span><span class="o">.</span><span class="n">setScore</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span> 
+        <span class="sd">&quot;&quot;&quot;Receives a new email, calculates its spam score, update the bags of words, and sort the email</span>
+<span class="sd">        Args:</span>
+<span class="sd">            mail: the new mail to be received</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># calculates the mail&#39;s spam score</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spam_score</span><span class="p">(</span><span class="n">mail</span><span class="p">)</span>
+        <span class="n">mail</span><span class="o">.</span><span class="n">set_score</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+
+        <span class="c1"># sort the mail and update the bags of words</span>
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">spams</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mail</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">mail</span><span class="o">.</span><span class="n">getId</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39; is a spam. Its Spam score is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mail</span><span class="o">.</span><span class="n">getScore</span><span class="p">()))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">addWords</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spamBOW</span><span class="p">,</span> <span class="n">mail</span><span class="o">.</span><span class="n">getWords</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="n">mail</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39; is a spam. Its Spam score is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mail</span><span class="o">.</span><span class="n">get_score</span><span class="p">()))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_words</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spam_bow</span><span class="p">,</span> <span class="n">mail</span><span class="o">.</span><span class="n">get_words</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">inbox</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mail</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">mail</span><span class="o">.</span><span class="n">getId</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39; is not a spam. Its Spam score is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mail</span><span class="o">.</span><span class="n">getScore</span><span class="p">()))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">addWords</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hamBOW</span><span class="p">,</span> <span class="n">mail</span><span class="o">.</span><span class="n">getWords</span><span class="p">())</span>
-    
-    <span class="c1">#this function trains the filter</span>
-    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mail</span><span class="p">,</span> <span class="n">isSpam</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">isSpam</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="n">mail</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39; is not a spam. Its Spam score is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mail</span><span class="o">.</span><span class="n">get_score</span><span class="p">()))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_words</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ham_bow</span><span class="p">,</span> <span class="n">mail</span><span class="o">.</span><span class="n">get_words</span><span class="p">())</span>
+
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mail</span><span class="p">,</span> <span class="n">is_spam</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Trains the filter</span>
+<span class="sd">        Args:</span>
+<span class="sd">            mail: the training mail</span>
+<span class="sd">            is_spam: whether mail is spam or not</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">is_spam</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">spams</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mail</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">addWords</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spamBOW</span><span class="p">,</span> <span class="n">mail</span><span class="o">.</span><span class="n">getWords</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_words</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spam_bow</span><span class="p">,</span> <span class="n">mail</span><span class="o">.</span><span class="n">get_words</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">inbox</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mail</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">addWords</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hamBOW</span><span class="p">,</span> <span class="n">mail</span><span class="o">.</span><span class="n">getWords</span><span class="p">())</span>
-    
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_words</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ham_bow</span><span class="p">,</span> <span class="n">mail</span><span class="o">.</span><span class="n">get_words</span><span class="p">())</span>
+
+
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">addWords</span><span class="p">(</span><span class="n">bow</span><span class="p">,</span> <span class="n">words</span><span class="p">):</span>
-        <span class="n">checked</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">add_words</span><span class="p">(</span><span class="n">bow</span><span class="p">,</span> <span class="n">words</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds words to the bag of words</span>
+<span class="sd">        Args:</span>
+<span class="sd">            bow: the bag of words</span>
+<span class="sd">            words: the words to be added</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">checked</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># the checked words</span>
+
         <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">checked</span><span class="p">:</span> 
-                <span class="n">checked</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">bow</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="n">bow</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">w</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
-                <span class="k">else</span><span class="p">:</span> 
-                    <span class="n">recur</span> <span class="o">=</span> <span class="n">bow</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-                    <span class="n">bow</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">w</span><span class="p">:</span><span class="n">recur</span><span class="p">})</span>
+            <span class="n">checked</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+            <span class="c1"># update bag of words</span>
+            <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">bow</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">bow</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">w</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">recur</span> <span class="o">=</span> <span class="n">bow</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">bow</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">w</span><span class="p">:</span><span class="n">recur</span><span class="p">})</span>
 </pre></div>
 
     </div>
@@ -13435,18 +13496,20 @@ $$\Pr(S|W)=\frac{\Pr(W|S)}{\Pr(W|S)+\Pr(W|H)}$$</p>
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#creating training data</span>
-<span class="n">spam1</span> <span class="o">=</span> <span class="n">email</span><span class="p">(</span><span class="s1">&#39;spam1_train&#39;</span><span class="p">,</span><span class="s1">&#39;spam1.txt&#39;</span><span class="p">)</span>
-<span class="n">spam2</span> <span class="o">=</span> <span class="n">email</span><span class="p">(</span><span class="s1">&#39;spam2_train&#39;</span><span class="p">,</span><span class="s1">&#39;spam2.txt&#39;</span><span class="p">)</span>
-<span class="n">ham1</span>  <span class="o">=</span> <span class="n">email</span><span class="p">(</span><span class="s1">&#39;ham1_train&#39;</span><span class="p">,</span><span class="s1">&#39;ham1.txt&#39;</span><span class="p">)</span>
-<span class="n">ham2</span>  <span class="o">=</span> <span class="n">email</span><span class="p">(</span><span class="s1">&#39;ham2_train&#39;</span><span class="p">,</span><span class="s1">&#39;ham2.txt&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#creating training and testing data</span>
+<span class="n">spam1</span> <span class="o">=</span> <span class="n">Email</span><span class="p">(</span><span class="s1">&#39;spam1_train&#39;</span><span class="p">,</span><span class="s1">&#39;spam1.txt&#39;</span><span class="p">)</span>
+<span class="n">spam2</span> <span class="o">=</span> <span class="n">Email</span><span class="p">(</span><span class="s1">&#39;spam2_train&#39;</span><span class="p">,</span><span class="s1">&#39;spam2.txt&#39;</span><span class="p">)</span>
+<span class="n">spam3</span> <span class="o">=</span> <span class="n">Email</span><span class="p">(</span><span class="s1">&#39;spam3_test&#39;</span><span class="p">,</span><span class="s1">&#39;spam3.txt&#39;</span><span class="p">)</span>
+<span class="n">ham1</span>  <span class="o">=</span> <span class="n">Email</span><span class="p">(</span><span class="s1">&#39;ham1_train&#39;</span><span class="p">,</span><span class="s1">&#39;ham1.txt&#39;</span><span class="p">)</span>
+<span class="n">ham2</span>  <span class="o">=</span> <span class="n">Email</span><span class="p">(</span><span class="s1">&#39;ham2_train&#39;</span><span class="p">,</span><span class="s1">&#39;ham2.txt&#39;</span><span class="p">)</span>
+<span class="n">ham3</span>  <span class="o">=</span> <span class="n">Email</span><span class="p">(</span><span class="s1">&#39;ham3_test&#39;</span><span class="p">,</span><span class="s1">&#39;ham3.txt&#39;</span><span class="p">)</span>
 <span class="c1">#creating the filter and set the threshold to 10</span>
-<span class="n">spamFilter</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">spam_filter</span> <span class="o">=</span> <span class="n">Filter</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="c1">#training</span>
-<span class="n">spamFilter</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">spam1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">spamFilter</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">spam2</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">spamFilter</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">ham1</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">spamFilter</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">ham2</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">spam_filter</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">spam1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">spam_filter</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">spam2</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">spam_filter</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">ham1</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">spam_filter</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">ham2</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13467,7 +13530,7 @@ $$\Pr(S|W)=\frac{\Pr(W|S)}{\Pr(W|S)+\Pr(W|H)}$$</p>
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spamFilter</span><span class="o">.</span><span class="n">spamBOW</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spam_filter</span><span class="o">.</span><span class="n">spam_bow</span>
 </pre></div>
 
     </div>
@@ -13495,18 +13558,18 @@ $$\Pr(S|W)=\frac{\Pr(W|S)}{\Pr(W|S)+\Pr(W|H)}$$</p>
  &#39;must&#39;: 1,
  &#39;first&#39;: 1,
  &#39;confirm&#39;: 1,
- &#39;subscript&#39;: 2,
- &#39;you&#39;: 1,
+ &#39;subscript&#39;: 4,
+ &#39;you&#39;: 2,
  &#39;purchas&#39;: 1,
  &#39;follow&#39;: 1,
- &#39;free&#39;: 1,
- &#39;trial&#39;: 1,
+ &#39;free&#39;: 3,
+ &#39;trial&#39;: 3,
  &#39;charg&#39;: 1,
  &#39;after&#39;: 1,
  &#39;end&#39;: 1,
  &#39;renew&#39;: 1,
  &#39;unless&#39;: 1,
- &#39;cancel&#39;: 1,
+ &#39;cancel&#39;: 2,
  &#39;nov&#39;: 1,
  &#39;learn&#39;: 1,
  &#39;review&#39;: 1}</pre>
@@ -13532,7 +13595,7 @@ $$\Pr(S|W)=\frac{\Pr(W|S)}{\Pr(W|S)+\Pr(W|H)}$$</p>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;spams:&#39;</span><span class="p">)</span>
-<span class="p">[</span><span class="n">mail</span><span class="o">.</span><span class="n">getId</span><span class="p">()</span> <span class="k">for</span> <span class="n">mail</span> <span class="ow">in</span> <span class="n">spamFilter</span><span class="o">.</span><span class="n">spams</span><span class="p">]</span>
+<span class="p">[</span><span class="n">mail</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="k">for</span> <span class="n">mail</span> <span class="ow">in</span> <span class="n">spam_filter</span><span class="o">.</span><span class="n">spams</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -13585,7 +13648,7 @@ $$\Pr(S|W)=\frac{\Pr(W|S)}{\Pr(W|S)+\Pr(W|H)}$$</p>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hams:&#39;</span><span class="p">)</span>
-<span class="p">[</span><span class="n">mail</span><span class="o">.</span><span class="n">getId</span><span class="p">()</span> <span class="k">for</span> <span class="n">mail</span> <span class="ow">in</span> <span class="n">spamFilter</span><span class="o">.</span><span class="n">inbox</span><span class="p">]</span>
+<span class="p">[</span><span class="n">mail</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span> <span class="k">for</span> <span class="n">mail</span> <span class="ow">in</span> <span class="n">spam_filter</span><span class="o">.</span><span class="n">inbox</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -13637,8 +13700,8 @@ $$\Pr(S|W)=\frac{\Pr(W|S)}{\Pr(W|S)+\Pr(W|H)}$$</p>
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the spamicity of &quot;subscript&quot; is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">spamFilter</span><span class="o">.</span><span class="n">wordSpamicity</span><span class="p">(</span><span class="s1">&#39;subscript&#39;</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the spamicity of &quot;thank&quot; is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">spamFilter</span><span class="o">.</span><span class="n">wordSpamicity</span><span class="p">(</span><span class="s1">&#39;thank&#39;</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the spamicity of &quot;subscript&quot; is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">spam_filter</span><span class="o">.</span><span class="n">word_spamicity</span><span class="p">(</span><span class="s1">&#39;subscript&#39;</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the spamicity of &quot;thank&quot; is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">spam_filter</span><span class="o">.</span><span class="n">word_spamicity</span><span class="p">(</span><span class="s1">&#39;thank&#39;</span><span class="p">)))</span>
 </pre></div>
 
     </div>
@@ -13656,7 +13719,7 @@ $$\Pr(S|W)=\frac{\Pr(W|S)}{\Pr(W|S)+\Pr(W|H)}$$</p>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>the spamicity of &#34;subscript&#34; is 1.0
-the spamicity of &#34;thank&#34; is 0.5
+the spamicity of &#34;thank&#34; is 0.3333333333333333
 </pre>
 </div>
 </div>
@@ -13679,10 +13742,10 @@ We can see the spam scores of these 4 training emails.</p>
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the score of spam1_train is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">spamFilter</span><span class="o">.</span><span class="n">spamScore</span><span class="p">(</span><span class="n">spam1</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the score of spam2_train is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">spamFilter</span><span class="o">.</span><span class="n">spamScore</span><span class="p">(</span><span class="n">spam2</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the score of ham1_train is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">spamFilter</span><span class="o">.</span><span class="n">spamScore</span><span class="p">(</span><span class="n">ham1</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the score of ham2_train is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">spamFilter</span><span class="o">.</span><span class="n">spamScore</span><span class="p">(</span><span class="n">ham2</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the score of spam1_train is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">spam_filter</span><span class="o">.</span><span class="n">spam_score</span><span class="p">(</span><span class="n">spam1</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the score of spam2_train is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">spam_filter</span><span class="o">.</span><span class="n">spam_score</span><span class="p">(</span><span class="n">spam2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the score of ham1_train is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">spam_filter</span><span class="o">.</span><span class="n">spam_score</span><span class="p">(</span><span class="n">ham1</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the score of ham2_train is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">spam_filter</span><span class="o">.</span><span class="n">spam_score</span><span class="p">(</span><span class="n">ham2</span><span class="p">)))</span>
 </pre></div>
 
     </div>
@@ -13699,9 +13762,9 @@ We can see the spam scores of these 4 training emails.</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>the score of spam1_train is 24
+<pre>the score of spam1_train is 23
 the score of spam2_train is 70
-the score of ham1_train is 4
+the score of ham1_train is 2
 the score of ham2_train is 1
 </pre>
 </div>
@@ -13735,12 +13798,9 @@ This is the text of the testing spam, another subscription confirmation email:</
 <div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#creating testing data</span>
-<span class="n">spam3</span> <span class="o">=</span> <span class="n">email</span><span class="p">(</span><span class="s1">&#39;spam3_test&#39;</span><span class="p">,</span><span class="s1">&#39;spam3.txt&#39;</span><span class="p">)</span>
-<span class="n">ham3</span>  <span class="o">=</span> <span class="n">email</span><span class="p">(</span><span class="s1">&#39;ham3_test&#39;</span><span class="p">,</span><span class="s1">&#39;ham3.txt&#39;</span><span class="p">)</span>
-<span class="c1">#testing</span>
-<span class="n">spamFilter</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">spam3</span><span class="p">)</span>
-<span class="n">spamFilter</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">ham3</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#testing</span>
+<span class="n">spam_filter</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">spam3</span><span class="p">)</span>
+<span class="n">spam_filter</span><span class="o">.</span><span class="n">receive</span><span class="p">(</span><span class="n">ham3</span><span class="p">)</span>
 </pre></div>
 
     </div>
