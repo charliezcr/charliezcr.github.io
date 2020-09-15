@@ -13077,7 +13077,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Bayesian-Spam-Filter">Bayesian Spam Filter<a class="anchor-link" href="#Bayesian-Spam-Filter">&#182;</a></h1><h3 id="---by-Chengrui-Charlie-Zheng">-- by Chengrui Charlie Zheng<a class="anchor-link" href="#---by-Chengrui-Charlie-Zheng">&#182;</a></h3><h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>A spam filter is a filter in your email to filter spams, the mails you do not want to receive, out of hams, the legitimate emails you want. There are multiple ways of implementing a spam filter. I will use Naive Bayes Classifier and Bag-of-Words model to implement a Bayesian spam filter, the oldest kind of spam filter. This passage will walk you through the process of implementation, training and testing.</p>
+<h1 id="Bayesian-Spam-Filter">Bayesian Spam Filter<a class="anchor-link" href="#Bayesian-Spam-Filter">&#182;</a></h1><h3 id="---by-Chengrui-Charlie-Zheng">-- by Chengrui Charlie Zheng<a class="anchor-link" href="#---by-Chengrui-Charlie-Zheng">&#182;</a></h3><h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>A spam filter is a filter in your email to filter spams, the mails you do not want to receive, out of hams, the legitimate emails you want. There are multiple ways of implementing a spam filter. I will use Naive Bayes Classifier and Bag-of-Words model to implement a Bayesian spam filter, the oldest kind of spam filter. This page will walk you through the process of implementation, training and testing.</p>
 <h2 id="Email-and-Text-Cleaning">Email and Text Cleaning<a class="anchor-link" href="#Email-and-Text-Cleaning">&#182;</a></h2><p>When a email comes into your mailbox, there are a lot of features to determine whether the email is a spam or not. For a simple demonstration, I will only be analyzing the words in the body of a email, by calculating the probability of the word occuring in a spam. Here, I will first create a class of email as in the following code. The class consists of a constructor, which cleans the text, getters and setters for the attributes.</p>
 
 </div>
@@ -13153,7 +13153,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here is a detailed explanation of the constructor per se. An email should have an "ID", a string list of "words", and a "score" indicating its spam score. The higher the spam score is, the more likely the mail is spam. When a new mail comes in, we will first set its score to be 0 by default. As for "words", we will do the  text cleaning by using 'nltk' module in python. First, it will read the text from the file, and tokenize the text to split the text into words. For example, if we have a sentence "What do you mean by tokenizing?". Aftering tokenizing the text, it will extract every tokens(a word, a number or a punctuation), and make the tokens into a string list.</p>
+<p>An email should have an "ID", a string list of "words", and a "score" indicating its spam score. The higher the spam score is, the more likely the mail is spam. When a new mail comes in, we will first set its score to be 0 by default. As for "words", we will do the  text cleaning by using 'nltk' module in python. First, it will read the text from the file, and tokenize the text to split the text into words. For example, if we have a sentence "What do you mean by tokenizing?". Aftering tokenizing the text, it will extract every tokens(a word, a number or a punctuation), and make the tokens into a string list.</p>
 
 </div>
 </div>
@@ -13466,8 +13466,8 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Constructor">Constructor<a class="anchor-link" href="#Constructor">&#182;</a></h3><p>In the constructor, we can set a filter's threshold of the spam score. Hams with scores lower than the threshold will be passed into "inbox", an email list resembling the inbox in your mailbox. Spams with scores higher than the threshold will be passed into "spams", an email list of spams. There are also 2 bag-of-words, "spamBOW" for spams and "hamBOW" for hams. The bag-of-words model is a hashmap or a dictionary containing the words appeared in mails as keys, and the number of mails each word appeared as values. The example of the bag-of-words will be illustrated in the Training section.</p>
-<h3 id="Naive-Bayes-Foundation">Naive Bayes Foundation<a class="anchor-link" href="#Naive-Bayes-Foundation">&#182;</a></h3><p>After the filter is constructed, it will calculate the spamicity, the probability that a message containing a given word is spam in "wordSpamicity" function. The calculation process is based on Bayes' Theorem:
+<h3 id="Constructor">Constructor<a class="anchor-link" href="#Constructor">&#182;</a></h3><p>In the constructor, we can set a filter's threshold of the spam score. Hams with scores lower than the threshold will be passed into "inbox", an email list resembling the inbox in your mailbox. Spams with scores higher than the threshold will be passed into "spams", an email list of spams. There are also 2 bag-of-words, "spam_bow" for spams and "ham_bow" for hams. The bag-of-words model is a hashmap or a dictionary containing the words appeared in mails as keys, and the number of mails each word appeared as values. The example of the bag-of-words will be illustrated in the Training section.</p>
+<h3 id="Naive-Bayes-Foundation">Naive Bayes Foundation<a class="anchor-link" href="#Naive-Bayes-Foundation">&#182;</a></h3><p>After the filter is constructed, it will calculate the spamicity, the probability that a message containing a given word is spam in "word_spamicity" function. The calculation process is based on Bayes' Theorem:
 $$\Pr(S|W)=\frac{\Pr(W|S)\Pr(S)}{\Pr(W)}$$
 $Pr(S|W)$ is the probability that the email is a spam, knowing that the target word is in it. Namely, the probability that the email containing the target word is a spam.<br>
 $Pr(W|S)$ is the probability that the target word is in the email, knowing that the email is a spam. Namely, the probability that the target word appears in a spam.<br>
@@ -13483,10 +13483,10 @@ $$\Pr(S|W)=\frac{\Pr(W|S)\Pr(S)}{\Pr(W|S)\Pr(S)+\Pr(W|H)\Pr(H)}$$</p>
 <p>Now, the question is what are $Pr(S)$ and $Pr(H)$? If we are taking more features into account, such as probability of the email from a certain email address is 80% a spam and 20% a ham, we can take the exact value into calculation. However, because we are only using Naive Bayes Classifier to analyze the body of emails, we have unbiased hypothesis on whether a email is spam or ham. Therefore, $\Pr(S)=\Pr(H)=0.5$.
 Since $Pr(S) = Pr(H)$, we can simplify the formula above as:
 $$\Pr(S|W)=\frac{\Pr(W|S)}{\Pr(W|S)+\Pr(W|H)}$$</p>
-<h3 id="Spamicity-and-Spam-Score">Spamicity and Spam Score<a class="anchor-link" href="#Spamicity-and-Spam-Score">&#182;</a></h3><p>Now we found a way to calculate the probability that the email containing the target word is a spam. In our context, $Pr(W|S)$ can be calculated as the number of spams containing the target word divided by the total number of spams. We can look up the word in "spamBOW" to obtain the number of spams containing the target word, and get the length of "spams" to obtain the total number of spams.</p>
-<p>On the other hand, $Pr(W|H)$ can be calculated as the number of hams containing the target word divided by the total number of hams. We can look up the word in "hamBOW" to obtain the number of hams containing the target word, and get the length of "inbox" to obtain the total number of hams.</p>
+<h3 id="Spamicity-and-Spam-Score">Spamicity and Spam Score<a class="anchor-link" href="#Spamicity-and-Spam-Score">&#182;</a></h3><p>Now we found a way to calculate the probability that the email containing the target word is a spam. In our context, $Pr(W|S)$ can be calculated as the number of spams containing the target word divided by the total number of spams. We can look up the word in "spam_bow" to obtain the number of spams containing the target word, and get the length of "spams" to obtain the total number of spams.</p>
+<p>On the other hand, $Pr(W|H)$ can be calculated as the number of hams containing the target word divided by the total number of hams. We can look up the word in "ham_bow" to obtain the number of hams containing the target word, and get the length of "inbox" to obtain the total number of hams.</p>
 <p>We also need to consider an edge case. What if the filter has never seen the target word before? Since the target word is not in both of the bag-of-words. $Pr(W|S)$ and $Pr(W|H)$ will be 0, resulting in the divisor of our formula, $Pr(W|S) + Pr(W|H)$ to be 0. To solve this problem, we will be make the filter be more lenient and let the word pass the filter with a spamicity of 0.</p>
-<p>After figuring out the way to calculate the spamicity of each word, the "spamScore" function will loop through each word of the email and calculate the spam score of email according to the spamicity of each word.</p>
+<p>After figuring out the way to calculate the spamicity of each word, the "spam_score" function will loop through each word of the email and calculate the spam score of email according to the spamicity of each word.</p>
 <ul>
 <li>If a word's spamicity is from 0 to 0.5, then the word is safe and will not add any points to the spam score of the email. </li>
 <li>If a word's spamicity is from 0.5 to 0.75, it will add 1 points to the spam score of the email. </li>
@@ -13647,7 +13647,7 @@ $$\Pr(S|W)=\frac{\Pr(W|S)}{\Pr(W|S)+\Pr(W|H)}$$</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The 2 training hams are also added to the "inbox" of "spamFilter"</p>
+<p>The 2 training hams are also added to the "inbox" of "spam_filter"</p>
 
 </div>
 </div>
