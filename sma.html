@@ -9,11 +9,11 @@
 
 
 <style type="text/css">
-    pre { line-height: 125%; margin: 0; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
-span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
+    pre { line-height: 125%; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
 .highlight .c { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment */
@@ -14256,7 +14256,14 @@ a.anchor-link {
     </script>
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Social-Media-Analytics-on-Trump-and-Biden's-Twitter">Social Media Analytics on Trump and Biden's Twitter<a class="anchor-link" href="#Social-Media-Analytics-on-Trump-and-Biden's-Twitter">&#182;</a></h1><h2 id="---by-Charlie-Chengrui-Zheng-11/09/2020">-- by Charlie Chengrui Zheng 11/09/2020<a class="anchor-link" href="#---by-Charlie-Chengrui-Zheng-11/09/2020">&#182;</a></h2><p>In the recent presidential election, <a href="https://twitter.com/JoeBiden">Joe Biden</a> just defeated <a href="https://twitter.com/realDonaldTrump">Donald Trump</a> and became the next president of the United States. I am very interested in the statistics of their use of social media, especially Twitter. Therefore, I analyzed the data of their recent tweets by scraping their recent tweets, investigating people's responses and inspecting the contents of their tweets. Here is the detailed walkthrough of how this social media analytics was conducted.</p>
+<h2 id="Twitter-Scraping">Twitter Scraping<a class="anchor-link" href="#Twitter-Scraping">&#182;</a></h2><p>First, we need to scrape their tweets on Twitter. Because Twitter disallows web scrapers, you need apply to be a <a href="https://developer.twitter.com/en">Twitter developer</a> and get consumer key, consumer secret, access token and access token secret to be able to access the data of their twitter account. We will be using <a href="https://www.tweepy.org/">Tweepy</a> to access the Twitter API.</p>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[135]:</div>
@@ -14266,12 +14273,19 @@ a.anchor-link {
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
 <span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
 <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="n">WordCloud</span><span class="p">,</span> <span class="n">STOPWORDS</span>
 <span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">consumer_key</span> <span class="o">=</span> <span class="s2">&quot;I cannot show my key and secret&quot;</span>
+<span class="n">consumer_secret</span> <span class="o">=</span> <span class="s2">&quot;but to make this snippet of code work&quot;</span>
+<span class="n">access_token</span> <span class="o">=</span> <span class="s2">&quot;you can apply to be a twitter developer&quot;</span>
+<span class="n">access_token_secret</span> <span class="o">=</span> <span class="s2">&quot;you will have your own key and secret&quot;</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">OAuthHandler</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span> <span class="n">consumer_secret</span><span class="p">)</span>
+<span class="n">auth</span><span class="o">.</span><span class="n">set_access_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">,</span> <span class="n">access_token_secret</span><span class="p">)</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="n">wait_on_rate_limit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14299,33 +14313,6 @@ a.anchor-link {
 
 </div>
 
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Social-Media-Analytics-on-Trump-and-Biden's-Twitter">Social Media Analytics on Trump and Biden's Twitter<a class="anchor-link" href="#Social-Media-Analytics-on-Trump-and-Biden's-Twitter">&#182;</a></h1><h2 id="---by-Charlie-Chengrui-Zheng-11/09/2020">-- by Charlie Chengrui Zheng 11/09/2020<a class="anchor-link" href="#---by-Charlie-Chengrui-Zheng-11/09/2020">&#182;</a></h2><p>In the recent presidential election, <a href="https://twitter.com/JoeBiden">Joe Biden</a> just defeated <a href="https://twitter.com/realDonaldTrump">Donald Trump</a> and became the next president of the United States. I am very interested the statistics of their use of social media, especially Twitter. Therefore, I analyzed the data of their recent tweets by scraping their recent tweets, investigating people's responses and inspecting the contents of their tweets. Here is the detailed walkthrough of how this social media analytics was conducted.</p>
-<h2 id="Twitter-Scraping">Twitter Scraping<a class="anchor-link" href="#Twitter-Scraping">&#182;</a></h2><p>First, we need to scrape their tweets on Twitter. Because Twitter disallows web scrapers, you need apply to be a <a href="https://developer.twitter.com/en">Twitter developer</a> and get consumer key, consumer secret, access token and access token secret to be able to access the data of their twitter account. We will be using <a href="https://www.tweepy.org/">Tweepy</a> to access the Twitter API.</p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">consumer_key</span> <span class="o">=</span> <span class="s2">&quot;I cannot show my key and secret&quot;</span>
-<span class="n">consumer_secret</span> <span class="o">=</span> <span class="s2">&quot;but to make this snippet of code work&quot;</span>
-<span class="n">access_token</span> <span class="o">=</span> <span class="s2">&quot;you can apply to be a twitter developer&quot;</span>
-<span class="n">access_token_secret</span> <span class="o">=</span> <span class="s2">&quot;you will have your own key and secret&quot;</span>
-<span class="n">auth</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">OAuthHandler</span><span class="p">(</span><span class="n">consumer_key</span><span class="p">,</span> <span class="n">consumer_secret</span><span class="p">)</span>
-<span class="n">auth</span><span class="o">.</span><span class="n">set_access_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">,</span> <span class="n">access_token_secret</span><span class="p">)</span>
-<span class="n">api</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="n">auth</span><span class="p">,</span> <span class="n">wait_on_rate_limit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
 </div>
 
 </div>
@@ -14834,7 +14821,7 @@ Trump has 2275648 retweets in total and 45512 retweets per tweet.
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>The graphs show that Biden gained more favorites and retweets than Trump. On average, Biden has a little more retweets than Trump, and more than twice favorites than Trump. Biden is more popular than Trump on Twitter</p>
-<h3 id="Word-Cloud">Word Cloud<a class="anchor-link" href="#Word-Cloud">&#182;</a></h3><p>We will investigate the contents of the text of the 2 presidents' tweets. First, we will build a corpus for each president. The corpus contains every word in their tweets' text. We will first need to tokenize every tweets, and store them into the corpus and generate the visualized word cloud by using the function below. The word clouds will display the frequently mentioned words in their tweets. The bigger the word is, the more frequent the word is used</p>
+<h3 id="Word-Cloud">Word Cloud<a class="anchor-link" href="#Word-Cloud">&#182;</a></h3><p>We will investigate the contents of the text of the 2 presidents' tweets. First, we will build a corpus for each president. The corpus contains every word in their tweets' text. We will first need to tokenize every tweets, and store them into the corpus and generate the visualized word cloud by using the function below. The word clouds will display the frequently mentioned words in their tweets. The bigger the word is, the more frequent the word is used.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14879,7 +14866,7 @@ Trump has 2275648 retweets in total and 45512 retweets per tweet.
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Let us look at the word cloud of Trump's tweets</p>
+<p>Let us look at the word cloud of Trump's tweets (Note: 'rt' stands for 'retweet')</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
