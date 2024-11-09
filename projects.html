@@ -1,263 +1,325 @@
 <html class="home blog no-js" lang="en-US">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <head>
     <title>Charlie'z | Chengrui Zheng</title>
     <link rel="icon" href="images/icon.png" type="icon">
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
     <meta name="description" content="This is Charlie Chengrui Zheng's personal website about his projects as in
-            data analytics"/>
+            data analytics" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-          type="text/css" media="all"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pompiere"
-          type="text/css" media="screen"/>
-    <link rel="stylesheet" href="style.css" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="print.css" type="text/css" media="print"/>
+        type="text/css" media="all" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pompiere" type="text/css" media="screen" />
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="print.css" type="text/css" media="print" />
     <script src='js/jquery-3.0.0.min.js'></script>
     <script src='js/jquery-migrate-3.0.1.min.js'></script>
 </head>
+
 <body class="home sticky-menu sidebar-off" id="top">
-<header class="header">
-    <div class="header-wrap">
-        <div class="logo plain logo-left">
-            <div class="site-title">
-                <a href="index.html" title="Go to Home">Charlie'z</a>
+    <header class="header">
+        <div class="header-wrap">
+            <div class="logo plain logo-left">
+                <div class="site-title">
+                    <a href="index.html" title="Go to Home">Charlie'z</a>
+                </div>
             </div>
+
+            <nav id="nav" role="navigation">
+                <div class="table">
+                    <div class="table-cell">
+                        <ul id="menu-menu-1">
+                            <li class="menu-item">
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="exp.html">Experience</a>
+                                <ul class="sub-menu">
+                                    <li class="menu-item">
+                                        <a href="exp.html#education">Education</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="exp.html#work">Work Experience</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="exp.html#skills">Skills</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="menu-item">
+                                <a href="projects.html">Projects</a>
+                                <ul class="sub-menu">
+                                    <li class="menu-item">
+                                        <a href="projects.html#Embody">Embodied AI</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="projects.html#Kpop">Kpop Data Analysis</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="projects.html#MLPython">Machine Learning in Python</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item">
+                                <a href="stories.html">Stories</a>
+                            </li>
+                            <li class="menu-inline menu-item">
+                                <a title="LinkedIn" href="https://www.linkedin.com/in/chengrui-zheng">
+                                    <i class="fa fa-linkedin"></i><span class="i">LinkedIn</span>
+                                </a>
+                            </li>
+                            <li class="menu-inline menu-item">
+                                <a title="Github" href="http://github.com/charliezcr">
+                                    <i class="fa fa-github"></i><span class="i">Github</span>
+                                </a>
+                            </li>
+                            <li class="menu-inline menu-item">
+                                <a title="Instagram" href="https://www.instagram.com/charliecrzheng">
+                                    <i class="fa fa-instagram"></i><span class="i">Instagram</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <a href="#nav" class="menu-trigger"><i class="fa fa-bars"></i></a>
         </div>
-
-        <nav id="nav" role="navigation">
-            <div class="table">
-                <div class="table-cell">
-                    <ul id="menu-menu-1">
-                        <li class="menu-item">
-                            <a href="index.html">Home</a></li>
-                        <li class="menu-item">
-                            <a href="exp.html">Experience</a>
-                            <ul class="sub-menu">
-                                <li class="menu-item">
-                                    <a href="exp.html#education">Education</a></li>
-                                <li class="menu-item">
-                                    <a href="exp.html#work">Work Experience</a></li>
-                                <li class="menu-item">
-                                    <a href="exp.html#skills">Skills</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="menu-item">
-                            <a href="projects.html">Projects</a>
-                            <ul class="sub-menu">
-                                <li class="menu-item">
-                                    <a href="projects.html#Kpop">Kpop Data Analysis</a></li>
-                                <li class="menu-item">
-                                    <a href="projects.html#MLPython">Machine Learning in Python</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item">
-                            <a href="stories.html">Stories</a>
-                        </li>
-                        <li class="menu-inline menu-item">
-                            <a title="LinkedIn" href="https://www.linkedin.com/in/chengrui-zheng">
-                                <i class="fa fa-linkedin"></i><span class="i">LinkedIn</span>
-                            </a></li>
-                        <li class="menu-inline menu-item">
-                            <a title="Github" href="http://github.com/charliezcr">
-                                <i class="fa fa-github"></i><span class="i">Github</span>
-                            </a></li>
-                        <li class="menu-inline menu-item">
-                            <a title="Instagram" href="https://www.instagram.com/charliecrzheng">
-                                <i class="fa fa-instagram"></i><span class="i">Instagram</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <a href="#nav" class="menu-trigger"><i class="fa fa-bars"></i></a>
-    </div>
-</header>
-<main>
-    <div class="wrap full-wrap">
-        <section class="main main-archive">
-            <article class="post result">
-                <div class="inner">
-                    <h1 class="searching" id="Kpop">projects</h1>
-                </div>
-            </article>
-            <section class="main">
-                <article class="post page">
+    </header>
+    <main>
+        <div class="wrap full-wrap">
+            <section class="main main-archive">
+                <article class="post result">
                     <div class="inner">
-                        <p><img class="size-full alignleft rounded" src="images/python.png" alt="python" width="50"
-                                height="50"></p>
-                        <h3>Kpop Data Analysis</h3>
-                        <div class="post-content">
-                            <p>02/2021 - 04/2021</p>
-                            <a title="Github" href="https://github.com/charliezcr/Kpop-Data-Analysis">
-                                <i class="fa fa-github" style="color:black"> Code</i>
-                            </a>
-                        </div>
-                        <div class="post-content">
-                            <br>
-                            <h6>Part.1 Kpop Explained by Data</h6>
-                            <p>Analyzed data of all K-pop idols from its start to 2021 about K-pop Industry,
-                                artists and companies</p>
-                            <div align="center"><a class="more-link" href="kda.html">pt.1 code</a></div>
-                            <br>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/NIsDL-QKT3s"
+                        <h1 class="searching" id="Embody">projects</h1>
+                    </div>
+                </article>
+                <section class="main">
+                    <article class="post page">
+                        <div class="inner">
+                            <p><img class="size-full alignleft rounded" src="images/modelscope.jpeg" alt="modelscope"
+                                    width="50" height="50"></p>
+                            <h3>Embodied AI</h3>
+                            <div class="post-content">
+                                <h6>Modelscope's Embodied AI Open-source Community</h6>
+                                <p>04/2024 - present</p>
+                                <p>I initiated and managed Modelscope’s Embodied Intelligence open-source community;
+                                    designed and promoted development processes using open-source models to popularize
+                                    embodied intelligence. The homepage attracted more than 30,000 views.</p>
+                                <div align="center">
+                                    <a class="more-link" href="https://modelscope.cn/brand/view/embody">
+                                        Modelscope Homepage</a>
+                                </div>
+                                <div class="post-content">
+                                    <br><br>
+                                    <h6>Embodied AI Education</h6>
+                                    <p>08/2024 - present</p>
+                                    <p>I made a presentation about applying multimodal large language models to embodied
+                                        AI.
+                                        I also wrote articles as a survey of embodied AI, publihsed on DataWhale and
+                                        WayToAGI to
+                                        popularize the concepts of Embodied AI.</p>
+                                    <div align="center">
+                                        <a class="more-link" href="https://mp.weixin.qq.com/s/3xaUU6bXqy2I4lumV_D_Gg">
+                                            Article 1 on DataWhale</a>
+                                        <a class="more-link" href="https://mp.weixin.qq.com/s/6YmtVB-HNJw42AwpWryozA">
+                                            Article 2 on DataWhale</a>
+                                        <a class="more-link"
+                                            href="https://waytoagi.feishu.cn/wiki/ImiqwOJfCibpDikgGcQccwO2nWh">
+                                            Article 1 on WayToAGI</a>
+                                        <a class="more-link"
+                                            href="https://waytoagi.feishu.cn/wiki/ZQmLwBhmGi0ekQkHGmRcEQyfnud">
+                                            Article 2 on WayToAGI</a>
+                                    </div>
+                                    <br></br>
+                                    <iframe width="560" height="315"
+                                        src="//player.bilibili.com/player.html?isOutside=true&aid=113078972711238&bvid=BV1HSpweoEhN&cid=25735923000&p=1"
+                                        scrolling="no" border="0" frameborder="no" framespacing="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen="true"></iframe>
+                                </div>
+                                <div class="border" id="Kpop"></div>
+                            </div>
+                    </article>
+                    <article class="post page">
+                        <div class="inner">
+                            <p><img class="size-full alignleft rounded" src="images/python.png" alt="python" width="50"
+                                    height="50"></p>
+                            <h3>Kpop Data Analysis</h3>
+                            <div class="post-content">
+                                <p>02/2021 - 04/2021</p>
+                                <a title="Github" href="https://github.com/charliezcr/Kpop-Data-Analysis">
+                                    <i class="fa fa-github" style="color:black"> Code</i>
+                                </a>
+                            </div>
+                            <div class="post-content">
+                                <br>
+                                <h6>Part.1 Kpop Explained by Data</h6>
+                                <p>Analyzed data of all K-pop idols from its start to 2021 about K-pop Industry,
+                                    artists and companies</p>
+                                <div align="center"><a class="more-link" href="kda.html">pt.1 code</a></div>
+                                <br>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/NIsDL-QKT3s"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen></iframe>
-                        </div>
-                        <div class="post-content">
-                            <br>
-                            <h6>Part.2 Kpop Companies Explained by Data</h6>
-                            <p>Visualized the business performance of public K-pop companies and analyzed
-                                their artist management and international marketing strategies</p>
-                            <div align="center"><a class="more-link" href="kda2.html">pt.2 code</a></div>
-                            <br>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/SCZ6co7uuNQ"
+                            </div>
+                            <div class="post-content">
+                                <br>
+                                <h6>Part.2 Kpop Companies Explained by Data</h6>
+                                <p>Visualized the business performance of public K-pop companies and analyzed
+                                    their artist management and international marketing strategies</p>
+                                <div align="center"><a class="more-link" href="kda2.html">pt.2 code</a></div>
+                                <br>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/SCZ6co7uuNQ"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen></iframe>
-                            <p>Here are the interactive data visualization of revenues and net income of
-                                Kpop Agencies from 2016 to 2020. If you hover your pointers over the lines
-                                of each year, the chart will show a hover box of the revenue or the net
-                                income of all companies that year.</p>
-                            <div align="center">
-                                <a class="more-link" href="Revenues of Kpop Agencies.html">
-                                    Chart of Revenue</a>
-                                <a class="more-link" href="Net Income of Kpop Agencies.html">
-                                    Chart of Net Income</a>
+                                <p>Here are the interactive data visualization of revenues and net income of
+                                    Kpop Agencies from 2016 to 2020. If you hover your pointers over the lines
+                                    of each year, the chart will show a hover box of the revenue or the net
+                                    income of all companies that year.</p>
+                                <div align="center">
+                                    <a class="more-link" href="Revenues of Kpop Agencies.html">
+                                        Chart of Revenue</a>
+                                    <a class="more-link" href="Net Income of Kpop Agencies.html">
+                                        Chart of Net Income</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="post-content">
-                            <br>
-                            <h6>Part.3 International Kpop Artists</h6>
-                            <p>In my last Kpop Data Analysis Project. I realized that there are some
-                                mistakes about nationality of kpop artists in the dataset. I corrected the
-                                data and made a clearer visualization of international Kpop artists by using
-                                Python and Plotly. This an interative choropleth of Kpop Stars' nationality
-                                other than South Korea. If you hover your pointers on the map, ther will be
-                                a information box showing how many Kpop star are from this country.</p>
-                            <div align="center">
-                                <a class="more-link" href="kda4.html">pt.3 code</a>
-                                <a class="more-link" href="countries.html">Interactive Map</a>
+                            <div class="post-content">
+                                <br>
+                                <h6>Part.3 International Kpop Artists</h6>
+                                <p>In my last Kpop Data Analysis Project. I realized that there are some
+                                    mistakes about nationality of kpop artists in the dataset. I corrected the
+                                    data and made a clearer visualization of international Kpop artists by using
+                                    Python and Plotly. This an interative choropleth of Kpop Stars' nationality
+                                    other than South Korea. If you hover your pointers on the map, ther will be
+                                    a information box showing how many Kpop star are from this country.</p>
+                                <div align="center">
+                                    <a class="more-link" href="kda4.html">pt.3 code</a>
+                                    <a class="more-link" href="countries.html">Interactive Map</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="post-content">
-                            <br>
-                            <h6>Part.4 Kpop On YouTube Explained by Data</h6>
-                            <p>As Kpop becomes increasingly international, YouTube plays a pivotal roles as
-                                the digital platforms for Kpop idols to share their music video to the
-                                audience all over the world. The view count is a key metrics reflecting the
-                                music videos' international popularity. I extracted the data of all Kpop
-                                music videos from Kpop Database and scraped the view counts of all 4262
-                                music videos from YouTube by 04/05/2021.</p>
-                            <div align="center"><a class="more-link" href="kda5.html">pt.4 code</a></div>
-                            <br>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/CtkDS3UFfOI"
+                            <div class="post-content">
+                                <br>
+                                <h6>Part.4 Kpop On YouTube Explained by Data</h6>
+                                <p>As Kpop becomes increasingly international, YouTube plays a pivotal roles as
+                                    the digital platforms for Kpop idols to share their music video to the
+                                    audience all over the world. The view count is a key metrics reflecting the
+                                    music videos' international popularity. I extracted the data of all Kpop
+                                    music videos from Kpop Database and scraped the view counts of all 4262
+                                    music videos from YouTube by 04/05/2021.</p>
+                                <div align="center"><a class="more-link" href="kda5.html">pt.4 code</a></div>
+                                <br>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/CtkDS3UFfOI"
                                     title="YouTube video player" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen></iframe>
+                            </div>
+                            <div class="post-content">
+                                <br>
+                                <h6>Part.5 Why Kpop Groups Have So Many Members?</h6>
+                                <p>On average, Kpop groups have 5.5 members. 5-member group is the most common form. But
+                                    why
+                                    can some Kpop groups become so big? The largest Kpop group, NCT, has 23 members. I
+                                    did
+                                    an exploratory data analysis of Kpop group sizes by timeline.</p>
+                                <div align="center"><a class="more-link" href="kda6.html">pt.5 code</a></div>
+                                <br>
+                            </div>
+                            <div class="border" id="MLPython"></div>
                         </div>
-                        <div class="post-content">
-                            <br>
-                            <h6>Part.5 Why Kpop Groups Have So Many Members?</h6>
-                            <p>On average, Kpop groups have 5.5 members. 5-member group is the most common form. But why
-                                can some Kpop groups become so big? The largest Kpop group, NCT, has 23 members. I did
-                                an exploratory data analysis of Kpop group sizes by timeline.</p>
-                            <div align="center"><a class="more-link" href="kda6.html">pt.5 code</a></div>
-                            <br>
-                        </div>
-                        <div class="border" id="MLPython"></div>
-                    </div>
-                </article>
-                <article class="post page">
-                    <div class="inner">
-                        <p><img class="size-full alignleft rounded" src="images/python.png" alt="python" width="50"
-                                height="50"></p>
-                        <h3>Machine Learning in Python</h3>
-                        <div class="post-content">
-                            <h6>Sentiment Analysis of Movie Reviews</h6>
-                            <p>01/2021</p>
-                            <a title="Github"
-                               href="http://github.com/charliezcr/Sentiment-Analysis-of-Movie-Reviews">
-                                <i class="fa fa-github" style="color:black"> Code</i>
-                            </a>
-                            <p>When you have a large amount of movie reviews, how can you know whether they are
-                                complements or criticisms? In this project, I used natural language processing tools
-                                to classify the sentiment of the text by using both shallow learning and deep learning,
-                                and made a sentiment analysis of the dataset of reviews on imdb.</p>
-                            <div align="center">
-                                <a class="more-link" href="sa_p1.html">pt.1-Basics</a>
-                                <a class="more-link" href="sa_p2.html">pt.2-LSA</a>
-                                <a class="more-link" href="sa_p3.html">pt.3-Ngram</a>
-                                <a class="more-link" href="sa_p4.html">pt.4-BERT</a>
+                    </article>
+                    <article class="post page">
+                        <div class="inner">
+                            <p><img class="size-full alignleft rounded" src="images/python.png" alt="python" width="50"
+                                    height="50"></p>
+                            <h3>Machine Learning in Python</h3>
+                            <div class="post-content">
+                                <h6>Sentiment Analysis of Movie Reviews</h6>
+                                <p>01/2021</p>
+                                <a title="Github"
+                                    href="http://github.com/charliezcr/Sentiment-Analysis-of-Movie-Reviews">
+                                    <i class="fa fa-github" style="color:black"> Code</i>
+                                </a>
+                                <p>When you have a large amount of movie reviews, how can you know whether they are
+                                    complements or criticisms? In this project, I used natural language processing tools
+                                    to classify the sentiment of the text by using both shallow learning and deep
+                                    learning,
+                                    and made a sentiment analysis of the dataset of reviews on imdb.</p>
+                                <div align="center">
+                                    <a class="more-link" href="sa_p1.html">pt.1-Basics</a>
+                                    <a class="more-link" href="sa_p2.html">pt.2-LSA</a>
+                                    <a class="more-link" href="sa_p3.html">pt.3-Ngram</a>
+                                    <a class="more-link" href="sa_p4.html">pt.4-BERT</a>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <br>
+                                <h6>Dimension Reduction with PCA</h6>
+                                <p>01/2021</p>
+                                <a title="Github" href="https://github.com/charliezcr/PCA">
+                                    <i class="fa fa-github" style="color:black"> Code</i>
+                                </a>
+                                <p>In this article I will use Principal Component Analysis to showcase dimension
+                                    reduction on 'banknote authentication' dataset</p>
+                                <div align="center"><a class="more-link" href="pca.html">More</a></div>
+                            </div>
+                            <div class="post-content">
+                                <br>
+                                <h6>Social Media Analytics</h6>
+                                <p>11/2020</p>
+                                <a title="Github" href="https://github.com/charliezcr/Social-Media-Analytics">
+                                    <i class="fa fa-github" style="color:black"> Code</i>
+                                </a>
+                                <p>Analyzed the data of Trump and Biden's recent tweets by scraping their recent tweets,
+                                    investigating people's responses and inspecting the contents of their tweets</p>
+                                <div align="center"><a class="more-link" href="sma.html">More</a></div>
+                            </div>
+                            <div class="post-content">
+                                <br>
+                                <h6>Calculating π by Monte-Carlo Simulation</h6>
+                                <p>07/2021</p>
+                                <a title="Github" href="https://github.com/charliezcr/montecarlo.html">
+                                    <i class="fa fa-github" style="color:black"> Code</i>
+                                </a>
+                                <p>As we learned more and more math, we found more and more ways to calculate π. In
+                                    computational statistics, there is a way to calculate π by brute force --
+                                    Monte-Carlo
+                                    Simulation. In this article, I will do a simple Monte-Carlo Simulation on the
+                                    calculation of π, or the area of a circle. This method can also be applied to the
+                                    calculation of any area of geometric shapes.</p>
+                                <div align="center"><a class="more-link" href="montecarlo.html">More</a></div>
+                            </div>
+                            <div class="post-content">
+                                <br>
+                                <h6>Bayesian Spam Filter</h6>
+                                <p>05/2020</p>
+                                <a title="Github" href="http://github.com/charliezcr/Python-Bayesian-Spam-Filter">
+                                    <i class="fa fa-github" style="color:black"> Code</i>
+                                </a>
+                                <p>In this project, I will use Naive Bayes Classifier and Bag-of-Words model to
+                                    implement a Bayesian spam filter. This article will walk you through the process of
+                                    implementation, training and testing.</p>
+                                <div align="center"><a class="more-link" href="Spam_filter.html">More</a></div>
                             </div>
                         </div>
-                        <div class="post-content">
-                            <br>
-                            <h6>Dimension Reduction with PCA</h6>
-                            <p>01/2021</p>
-                            <a title="Github" href="https://github.com/charliezcr/PCA">
-                                <i class="fa fa-github" style="color:black"> Code</i>
-                            </a>
-                            <p>In this article I will use Principal Component Analysis to showcase dimension
-                                reduction on 'banknote authentication' dataset</p>
-                            <div align="center"><a class="more-link" href="pca.html">More</a></div>
-                        </div>
-                        <div class="post-content">
-                            <br>
-                            <h6>Social Media Analytics</h6>
-                            <p>11/2020</p>
-                            <a title="Github" href="https://github.com/charliezcr/Social-Media-Analytics">
-                                <i class="fa fa-github" style="color:black"> Code</i>
-                            </a>
-                            <p>Analyzed the data of Trump and Biden's recent tweets by scraping their recent tweets,
-                                investigating people's responses and inspecting the contents of their tweets</p>
-                            <div align="center"><a class="more-link" href="sma.html">More</a></div>
-                        </div>
-                        <div class="post-content">
-                            <br>
-                            <h6>Calculating π by Monte-Carlo Simulation</h6>
-                            <p>07/2021</p>
-                            <a title="Github" href="https://github.com/charliezcr/montecarlo.html">
-                                <i class="fa fa-github" style="color:black"> Code</i>
-                            </a>
-                            <p>As we learned more and more math, we found more and more ways to calculate π. In
-                                computational statistics, there is a way to calculate π by brute force -- Monte-Carlo
-                                Simulation. In this article, I will do a simple Monte-Carlo Simulation on the
-                                calculation of π, or the area of a circle. This method can also be applied to the
-                                calculation of any area of geometric shapes.</p>
-                            <div align="center"><a class="more-link" href="montecarlo.html">More</a></div>
-                        </div>
-                        <div class="post-content">
-                            <br>
-                            <h6>Bayesian Spam Filter</h6>
-                            <p>05/2020</p>
-                            <a title="Github" href="http://github.com/charliezcr/Python-Bayesian-Spam-Filter">
-                                <i class="fa fa-github" style="color:black"> Code</i>
-                            </a>
-                            <p>In this project, I will use Naive Bayes Classifier and Bag-of-Words model to
-                                implement a Bayesian spam filter. This article will walk you through the process of
-                                implementation, training and testing.</p>
-                            <div align="center"><a class="more-link" href="Spam_filter.html">More</a></div>
-                        </div>
-                    </div>
-                </article>
+                    </article>
+                </section>
             </section>
-        </section>
-    </div><!-- /main-wrap -->
-</main>
-<footer class="footer">
-    <div class="footer-wrap">
-        <div id="footer-text">&copy; 2021 Charlie'z. Designed by Chengrui Zheng.</div>
-        <a href="#top" id="btt">Top <i class="fa fa-chevron-up"></i></a>
-    </div>
-</footer>
-<script>var ie9 = false;</script>
-<!--[if lte IE 9 ]>
+        </div><!-- /main-wrap -->
+    </main>
+    <footer class="footer">
+        <div class="footer-wrap">
+            <div id="footer-text">&copy; 2021 Charlie'z. Designed by Chengrui Zheng.</div>
+            <a href="#top" id="btt">Top <i class="fa fa-chevron-up"></i></a>
+        </div>
+    </footer>
+    <script>var ie9 = false;</script>
+    <!--[if lte IE 9 ]>
 <script>var ie9 = true;</script><![endif]-->
-<script src="js/global-plugins.min.js"></script>
-<script src="js/main.js"></script>
+    <script src="js/global-plugins.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
+
 </html>
