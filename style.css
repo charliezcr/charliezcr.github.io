@@ -3681,4 +3681,229 @@ header.header nav,
   }
 }
 
+/* ==========================================================================
+   15. Night Mode Toggle Switch
+   ========================================================================== */
+.theme-toggle-wrap {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+  padding: 5px 1em 5px 7px;
+  position: relative;
+  z-index: 5;
+}
+
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.theme-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d6dbe4;
+  border-radius: 28px;
+  -o-transition: background-color 0.3s ease;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+.theme-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  top: 3px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  -o-transition: -o-transform 0.3s ease;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+}
+
+.theme-switch input:checked + .theme-slider {
+  background-color: #6588e4;
+}
+
+.theme-switch input:checked + .theme-slider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
+}
+
+.theme-slider .fa {
+  position: absolute;
+  top: 6px;
+  font-size: 14px !important;
+  color: #fff;
+  z-index: 1;
+  -o-transition: opacity 0.3s ease;
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+
+.theme-slider .fa-sun-o {
+  right: 8px;
+  opacity: 0.75;
+}
+
+.theme-slider .fa-moon-o {
+  left: 8px;
+  opacity: 0;
+}
+
+.theme-switch input:checked + .theme-slider .fa-sun-o {
+  opacity: 0;
+}
+
+.theme-switch input:checked + .theme-slider .fa-moon-o {
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   16. Night Mode Theme
+   ========================================================================== */
+html.night-mode,
+html.night-mode body {
+  background-color: #16181d;
+  color: #c3c7cf;
+}
+
+html.night-mode .side .widget,
+html.night-mode .post,
+html.night-mode header.header:before,
+html.night-mode header.header ul ul:before,
+html.night-mode .comments-wrapper,
+html.night-mode .author-wrap,
+html.night-mode .related-posts,
+html.night-mode .footer-widgets,
+html.night-mode .home-sticky {
+  background: #1e2128;
+}
+
+html.night-mode header.header {
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+html.night-mode .post-image {
+  background: #1e2128;
+}
+
+/* Headings (override inline color:black) */
+html.night-mode h1,
+html.night-mode h2,
+html.night-mode h3,
+html.night-mode h4,
+html.night-mode h5,
+html.night-mode h6,
+html.night-mode .site-title a {
+  color: #f0f2f5 !important;
+}
+
+/* Body copy (override inline color:grey) */
+html.night-mode p,
+html.night-mode li,
+html.night-mode big,
+html.night-mode td,
+html.night-mode th,
+html.night-mode .pre-content,
+html.night-mode #footer-text {
+  color: #b8bcc4 !important;
+}
+
+/* Links & navigation */
+html.night-mode a {
+  color: #7d9df3;
+}
+
+html.night-mode header.header nav a,
+html.night-mode header.header a.menu-trigger,
+html.night-mode header.header a.search-trigger,
+html.night-mode footer.footer,
+html.night-mode footer.footer a {
+  color: #c3c7cf;
+}
+
+html.night-mode a:hover,
+html.night-mode header.header nav a:hover,
+html.night-mode footer.footer a:hover {
+  color: #9db4f7 !important;
+}
+
+/* Borders & accents */
+html.night-mode .post-content a,
+html.night-mode .single-post .post-content a,
+html.night-mode .post .post-content a {
+  border-bottom-color: #7d9df3;
+}
+
+html.night-mode .post-content blockquote {
+  border-left-color: #7d9df3;
+}
+
+html.night-mode .more-link {
+  border-color: #7d9df3 !important;
+}
+
+html.night-mode table,
+html.night-mode table td,
+html.night-mode table th {
+  border-color: #2c303a;
+}
+
+html.night-mode table th {
+  background: #262a33;
+}
+
+html.night-mode table tr:nth-child(odd) td {
+  background: #1e2128;
+}
+
+/* Mobile full-screen menu & overlays */
+html.night-mode body.menu-active header.header nav#nav {
+  background-color: rgba(22, 24, 29, 0.97) !important;
+  color: #c3c7cf;
+}
+
+html.night-mode body.menu-active header.header nav#nav a {
+  color: #c3c7cf;
+}
+
+html.night-mode body.menu-active header.header nav#nav a:hover {
+  color: #9db4f7 !important;
+}
+
+html.night-mode #topsearch,
+html.night-mode .js .share-overlay {
+  background-color: rgba(22, 24, 29, 0.97) !important;
+  color: #c3c7cf;
+}
+
+/* ==========================================================================
+   17. Home Hero / Content Spacing
+   ========================================================================== */
+/* The home page opens with a full-height hero, so the sticky-header offset
+   padding that main.js applies to .wrap.full-wrap only produces a redundant
+   blank band between the hero and the first content panel. Remove it there;
+   pages without a hero still need the offset to clear the fixed header. */
+body.has-hero .wrap.full-wrap {
+  padding-top: 0 !important;
+}
+
 /*# sourceMappingURL=style.css.map */
